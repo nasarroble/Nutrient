@@ -4,6 +4,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity {   //ActionBarActivity
@@ -12,6 +16,18 @@ public class MainActivity extends AppCompatActivity {   //ActionBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        final TextView  results = (TextView) findViewById(R.id.results);
+        Button searchBtn = (Button) findViewById(R.id.searchBtn);
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AutoCompleteTextView text = (AutoCompleteTextView) findViewById(R.id.search_text);
+                BackgroundConn backgroundConn = new BackgroundConn();
+                String search = text.getText().toString();
+                results.setText(backgroundConn.doInBackground());
+            }
+        });
     }
 
     @Override
